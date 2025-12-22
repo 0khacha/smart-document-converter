@@ -1,0 +1,259 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Navbar */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 3px dashed #0d6efd;
+    border-radius: 15px;
+    padding: 60px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.upload-area:hover {
+    background-color: #e7f1ff;
+    border-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+    background-color: #cfe2ff;
+    border-color: #0a58ca;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+.upload-content h5 {
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+/* File Info */
+.file-info {
+    padding: 1rem;
+    background-color: #e7f1ff;
+    border-radius: 10px;
+    border-left: 4px solid #0d6efd;
+}
+
+.file-info i {
+    font-size: 1.5rem;
+    color: #0d6efd;
+    margin-right: 0.5rem;
+}
+
+/* Format Selection */
+.format-card {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.format-card:hover {
+    border-color: #0d6efd;
+    background-color: #f8f9fa;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.format-card.selected {
+    border-color: #0d6efd;
+    background-color: #e7f1ff;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+.format-card i {
+    font-size: 3rem;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
+}
+
+.format-card h6 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+.format-card small {
+    color: #6c757d;
+}
+
+/* Preview Box */
+.preview-box {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #212529;
+}
+
+/* Progress Bar */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.5s ease;
+}
+
+/* Download Links */
+.download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.download-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #198754;
+}
+
+.download-link i {
+    font-size: 1.5rem;
+    color: #198754;
+    margin-right: 0.5rem;
+}
+
+.download-link .btn {
+    min-width: 100px;
+}
+
+/* Feature Boxes */
+.feature-box {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+.feature-box h5 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 40px 15px;
+    }
+    
+    .upload-icon {
+        font-size: 3rem;
+    }
+    
+    .format-card {
+        margin-bottom: 1rem;
+    }
+    
+    .feature-box {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin: 2rem auto;
+    display: block;
+}
+
+/* Error Alert */
+.alert-danger {
+    border-radius: 10px;
+    border-left: 4px solid #dc3545;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}

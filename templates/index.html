@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Document Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-file-earmark-arrow-down"></i>
+                Smart Document Converter
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 mb-3">Convert Documents Instantly</h1>
+                    <p class="lead text-muted">
+                        Transform PDF & Images into editable Word or Excel files
+                    </p>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="card shadow-lg mb-4">
+                    <div class="card-body p-5">
+                        <h4 class="card-title mb-4">
+                            <i class="bi bi-cloud-upload"></i> Upload Your Document
+                        </h4>
+
+                        <!-- File Upload Area -->
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg" hidden>
+                            <div class="upload-content">
+                                <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                                <h5>Drag & Drop or Click to Browse</h5>
+                                <p class="text-muted">
+                                    Supported formats: PDF, PNG, JPG, JPEG (Max 16MB)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- File Info -->
+                        <div id="fileInfo" class="file-info d-none mt-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="bi bi-file-earmark-text"></i>
+                                    <span id="fileName">document.pdf</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" id="removeFile">
+                                    <i class="bi bi-x-circle"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Format Selection -->
+                        <div id="formatSelection" class="d-none mt-4">
+                            <h5 class="mb-3">Choose Output Format</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="format-card" data-format="word">
+                                        <i class="bi bi-file-word"></i>
+                                        <h6>Word Document</h6>
+                                        <small>Best for text-heavy content</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="format-card" data-format="excel">
+                                        <i class="bi bi-file-excel"></i>
+                                        <h6>Excel Spreadsheet</h6>
+                                        <small>Best for tables & data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="format-card" data-format="both">
+                                        <i class="bi bi-files"></i>
+                                        <h6>Both Formats</h6>
+                                        <small>Get Word + Excel</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Convert Button -->
+                        <div class="text-center mt-4">
+                            <button id="convertBtn" class="btn btn-primary btn-lg d-none" disabled>
+                                <i class="bi bi-arrow-repeat"></i> Convert Document
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div id="previewSection" class="card shadow-lg mb-4 d-none">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-eye"></i> Document Preview
+                        </h5>
+                        <div id="previewContent" class="preview-box">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progressSection" class="card shadow-lg mb-4 d-none">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-hourglass-split"></i> Processing
+                        </h5>
+                        <div class="progress" style="height: 25px;">
+                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar" style="width: 0%">0%</div>
+                        </div>
+                        <p id="progressText" class="text-center mt-2 text-muted">Initializing...</p>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="card shadow-lg mb-4 d-none">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">
+                            <i class="bi bi-check-circle"></i> Conversion Successful!
+                        </h5>
+                        <p class="text-muted">Your documents are ready to download</p>
+                        <div id="downloadLinks" class="download-links"></div>
+                        <button id="convertAnotherBtn" class="btn btn-outline-primary mt-3">
+                            <i class="bi bi-arrow-clockwise"></i> Convert Another Document
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error Section -->
+                <div id="errorSection" class="alert alert-danger d-none" role="alert">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <strong>Error:</strong> <span id="errorMessage"></span>
+                </div>
+
+                <!-- Features Section -->
+                <div class="row mt-5 mb-4">
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="feature-box">
+                            <i class="bi bi-lightning-charge feature-icon"></i>
+                            <h5>Fast Processing</h5>
+                            <p class="text-muted">Convert documents in seconds</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="feature-box">
+                            <i class="bi bi-shield-check feature-icon"></i>
+                            <h5>Secure & Private</h5>
+                            <p class="text-muted">Your files are processed locally</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="feature-box">
+                            <i class="bi bi-grid-3x3 feature-icon"></i>
+                            <h5>Smart Detection</h5>
+                            <p class="text-muted">Automatically detects tables & structure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-5">
+        <p class="text-muted mb-0">
+            Smart Document Converter &copy; 2024 | Built with Python & Flask | developed by @0khacha
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
