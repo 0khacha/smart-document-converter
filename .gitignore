@@ -52,16 +52,16 @@ inputs/
 Thumbs.db
 
 # Logs
-*.log
-git_init.log
-git_push.log
-git_root.log
-git_status.log
-init.log
-add.log
-commit.log
-remote.log
-push_output.log
+# *.log
+# git_init.log
+# git_push.log
+# git_root.log
+# git_status.log
+# init.log
+# add.log
+# commit.log
+# remote.log
+# push_output.log
 
 # Environment variables
 .env
