@@ -56,7 +56,7 @@ sudo apt install libgl1-mesa-glx
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/smart-document-converter.git
+git clone https://github.com/0khacha/smart-document-converter.git
 cd smart-document-converter
 ```
 
